@@ -3,13 +3,16 @@ const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 const editForm = document.getElementById("edit-form"); 
 let editedNode = null
-document.addEventListener("DOMContentLoaded", () => {
-   //showTrainers();
-    }) 
+
+// document.addEventListener("DOMContentLoaded", () => {
+//    //showTrainers();
+//     })
+
+//will show all teams
 fetch(TRAINERS_URL)
 .then(res => res.json())
 .then(jsonData => showTrainers(jsonData))
-//will show all teams
+
 const showTrainers = (trainerData) => {
 trainerData.forEach(trainer => {
     newTrainer(trainer)
@@ -67,6 +70,8 @@ const makeTeamCard = (trainer) => {   //team.id same as the trainers id
   div.appendChild(editTrainerButton);
   return div;
 }
+
+// adding a pokemon to a team
 const postPokemon = (trainer) => {
   fetch(POKEMONS_URL, {
     method: "POST",
@@ -84,6 +89,8 @@ const postPokemon = (trainer) => {
     editedNode = null
 })
 }
+
+// delete a pokemon from a team 
 const releasePokemon = (pokemon) => {
   fetch(`${POKEMONS_URL}/${pokemon.id}`, {
     method: "DELETE"
@@ -104,6 +111,8 @@ editForm.addEventListener("submit", (e) => {
   }
   updateTrainer(trainer); 
 })
+
+// updates the trainer's name 
 const updateTrainer = (trainer) => {
   fetch(`http://localhost:3000/trainers/${trainer.id}`, {
     method: "PATCH",
@@ -121,7 +130,7 @@ const updateTrainer = (trainer) => {
 }
 
 
-// Old Code
+// old code
 
 // const BASE_URL = "http://localhost:3000"
 // const TRAINERS_URL = `${BASE_URL}/trainers`
